@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+
+	<!-- 配置自动扫描的包 -->
+	<context:component-scan base-package="zyf"></context:component-scan>
+
+	<!-- 读取静态资源 -->
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="/,classpath:/WEB-INF/views/"
+		mapping="/resources/**" />
+	<mvc:resources location="/,classpath:/WEB-INF/imgs/"
+		mapping="/resources/**" />
+	<mvc:resources location="/,classpath:/WEB-INF/jsp/"
+		mapping="/resources/**" />
+
+	<!-- 配置视图解析器 如何把handler 方法返回值解析为实际的物理视图 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 支持国际化 property中的name：与注入类中的属性名一致，value:决定了后面国际化文件的名称，这里是i18n, 所以创建文件都必须以il8n开头。 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n"></property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="60" />
+	</bean>
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<bean class="zyf.interceptor.FirstInterceptor"></bean>
+		 <!-- 配置拦截器（不）作用的路径 :这里配置好的是要起作用的路径-->
+		<mvc:interceptor>
+		<mvc:mapping path="/emps/getAll" />
+			<bean class="zyf.interceptor.SecondInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

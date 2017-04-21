@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import zyf.dao.DepartmentDao;
-import zyf.dao.EmployeeDao;
+import zyf.dao.impl.DepartmentDao;
+import zyf.dao.impl.EmployeeDao;
 import zyf.entity.Employee;
 
 @Controller

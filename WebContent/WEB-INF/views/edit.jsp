@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form action="${pageContext.request.contextPath }/emps/edit" method="POST" modelAttribute="employee">
+	<form:form action="${pageContext.request.contextPath }/empsdb/edit" method="POST" modelAttribute="employee">
 		<!-- path 属性对应 html 表单标签的 name 属性值 -->
             LastName: <form:input path="lastName" />
 		<form:errors path="lastName"></form:errors>

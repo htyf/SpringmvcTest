@@ -26,6 +26,8 @@
 <body>
 <a href="emps/getAll">list all employees</a><br/>
 
+<a href="empsdb/getAll">list all employees by db</a><br/>
+
 <a href="emps/testJson" id="testJson">testJson</a>
 <br><br>
 
